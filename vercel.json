@@ -12,5 +12,6 @@
             "src": "/(.*)",
             "dest": "/api/index.php"
         }
-    ]
+    ],
+    "nodeVersion": "20.x"
 }
