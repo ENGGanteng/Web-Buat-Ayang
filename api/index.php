@@ -1,9 +1,7 @@
 <?php
-// Tampilkan error biar kita tahu masalahnya apa
+// Tampilkan error biar kita tidak menebak
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// Paksa folder storage ke /tmp karena Vercel itu read-only
-putenv('VIEW_COMPILED_PATH=/tmp');
-
+// Jembatan ke folder public
 require __DIR__ . '/../public/index.php';
