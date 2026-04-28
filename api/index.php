@@ -1,12 +1,23 @@
 <?php
-// 1. Tampilkan error supaya tidak cuma layar putih
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// 2. Paksa folder-folder bermasalah ke folder sementara (/tmp)
-putenv('VIEW_COMPILED_PATH=/tmp');
-putenv('SESSION_DRIVER=cookie');
-putenv('LOG_CHANNEL=stderr');
+// Bikin folder temporary supaya Laravel nggak Error 500 saat nulis view/cache
+$storageFolders = [
+    '/tmp/storage/framework/views',
+    '/tmp/storage/framework/sessions',
+    '/tmp/storage/framework/cache',
+    '/tmp/storage/logs'
+];
+
+foreach ($storageFolders as $folder) {
+    if (!is_dir($folder)) {
+        mkdir($folder, 0777, true);
+    }
+}
+
+// Paksa Laravel pakai jalur /tmp
+putenv('VIEW_COMPILED_PATH=/tmp/storage/framework/views');
 putenv('APP_CONFIG_CACHE=/tmp/config.php');
 putenv('APP_ROUTES_CACHE=/tmp/routes.php');
 
